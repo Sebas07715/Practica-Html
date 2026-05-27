@@ -1,22 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+/* 1. PALETA DE COLORES COHERENTE CON VARIABLES CSS */
+:root {
+    --color-principal: #8cb63c;     /* Verde corporativo GlobalImport */
+    --color-principal-hover: #769b32; /* Verde más oscuro para interacciones */
+    --color-oscuro: #11161b;        /* Negro azulado para textos principales y footer */
+    --color-claro: #ffffff;         /* Blanco puro */
+    --color-gris-fondo: #f4f6f8;    /* Gris suave para fondos de sección */
+    --color-texto-suave: #555555;   /* Gris oscuro para párrafos legibles */
+    
+    /* 2. VARIABLES DE TIPOGRAFÍA */
+    --fuente-titulos: 'Montserrat', sans-serif;
+    --fuente-cuerpo: 'Open Sans', sans-serif;
+}
+
 /* RESETEO BÁSICO */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-oscuro);
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-/* BARRA DE NAVEGACIÓN */
+/* BARRA DE NAVEGACIÓN (FLEXBOX) */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background-color: #ffffff;
+    background-color: var(--color-claro);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     position: fixed;
     width: 100%;
@@ -38,25 +58,27 @@ html {
 }
 
 .company-name {
+    font-family: var(--fuente-titulos);
     font-size: 1.3rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--color-oscuro);
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #4a4a4a;
-    font-weight: 500;
+    color: var(--color-texto-suave);
+    font-weight: 600;
     margin-left: 25px;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #8cb63c;
+    color: var(--color-principal);
 }
 
-/* SECCIÓN PRINCIPAL (HERO) */
+/* SECCIÓN PRINCIPAL (HERO ocupa 100% del ancho y alto) */
 .hero-section {
+    width: 100%;
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('assets/imagendofondo.png');
     background-size: cover;
@@ -71,11 +93,12 @@ html {
 }
 
 .hero-content {
-    color: #ffffff;
+    color: var(--color-claro);
     max-width: 800px;
 }
 
 .hero-content h1 {
+    font-family: var(--fuente-titulos);
     font-size: 3.5rem;
     margin-bottom: 20px;
     letter-spacing: 1px;
@@ -92,8 +115,8 @@ html {
 .btn-hero {
     display: inline-block;
     text-decoration: none;
-    background-color: #8cb63c;
-    color: #ffffff;
+    background-color: var(--color-principal);
+    color: var(--color-claro);
     padding: 12px 30px;
     font-size: 1rem;
     font-weight: 600;
@@ -103,14 +126,14 @@ html {
 }
 
 .btn-hero:hover {
-    background-color: #769b32;
+    background-color: var(--color-principal-hover);
     transform: translateY(-2px);
 }
 
-/* SECCIÓN DE SERVICIOS - CSS GRID Y EFECTO HOVER */
+/* SECCIÓN DE SERVICIOS */
 .services-section {
     padding: 100px 50px;
-    background-color: #f4f6f8;
+    background-color: var(--color-gris-fondo);
 }
 
 .services-header {
@@ -118,18 +141,19 @@ html {
     margin-bottom: 50px;
 }
 
-.services-header h2 {
+.services-header h2, .section-title h2 {
+    font-family: var(--fuente-titulos);
     font-size: 2.5rem;
-    color: #1a1a1a;
+    color: var(--color-oscuro);
     margin-bottom: 15px;
 }
 
-.services-header p {
-    color: #666;
+.services-header p, .section-title p {
+    color: var(--color-texto-suave);
     font-size: 1.1rem;
 }
 
-/* Grid Autoadaptable sin Media Queries repetitivos */
+/* LAYOUT DE CARDS CON CSS GRID */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -138,17 +162,18 @@ html {
     margin: 0 auto;
 }
 
-/* Tarjeta individual */
+/* CARDS CON SOMBRA Y HOVER */
 .service-card {
     position: relative;
     height: 350px;
     border-radius: 10px;
-    overflow: hidden; /* Oculta todo lo que salga de la tarjeta */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    background-color: #fff;
+    overflow: hidden;
+    background-color: var(--color-claro);
+    /* Sombra base solicitada */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease;
 }
 
-/* Imagen que cubre la tarjeta */
 .card-img {
     width: 100%;
     height: 100%;
@@ -156,7 +181,6 @@ html {
     transition: transform 0.5s ease;
 }
 
-/* Capa que contiene el texto y sube en el hover */
 .card-overlay {
     position: absolute;
     bottom: 0;
@@ -168,35 +192,170 @@ html {
     flex-direction: column;
     justify-content: flex-end;
     padding: 25px;
-    color: #ffffff;
-    /* Ubicación por defecto de la descripción antes del hover: desplazada hacia abajo */
-    transform: translateY(calc(100% - 70px)); 
+    color: var(--color-claro);
+    transform: translateY(calc(100% - 70px));
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .card-overlay h3 {
+    font-family: var(--fuente-titulos);
     font-size: 1.25rem;
     margin-bottom: 15px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 .card-description {
     font-size: 0.95rem;
     line-height: 1.5;
-    opacity: 0; /* Oculto por defecto */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* INTERACCIONES (HOVER) */
+/* EFECTOS HOVER DE LAS CARDS */
+.service-card:hover {
+    /* La sombra se vuelve más pronunciada al pasar el mouse */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); 
+}
+
 .service-card:hover .card-overlay {
-    transform: translateY(0); /* Sube por completo revelando la descripción */
+    transform: translateY(0);
 }
 
 .service-card:hover .card-description {
-    opacity: 1; /* Muestra suavemente el texto descriptivo */
+    opacity: 1;
 }
 
 .service-card:hover .card-img {
-    transform: scale(1.1); /* Hace un sutil zoom a la imagen de fondo */
+    transform: scale(1.1);
+}
+
+/* SECCIÓN ¿POR QUÉ ELEGIRNOS? (CSS GRID) */
+.why-choose-us {
+    padding: 100px 50px;
+    background-color: var(--color-claro);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.benefits-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 8px;
+    background-color: var(--color-gris-fondo);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--color-principal);
+}
+
+.benefit-item h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.4rem;
+    color: var(--color-oscuro);
+    margin-bottom: 15px;
+}
+
+.benefit-item p {
+    color: var(--color-texto-suave);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+.main-footer {
+    background-color: var(--color-oscuro);
+    color: #a0a5b0;
+    padding: 70px 50px 20px 50px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #232931;
+}
+
+.footer-column h3 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-claro);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.footer-column h4 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-claro);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 35px;
+    height: 2px;
+    background-color: var(--color-principal);
+}
+
+.footer-column p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #a0a5b0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: var(--color-principal);
+}
+
+.footer-contact p {
+    margin-bottom: 12px;
+}
+
+.footer-contact strong {
+    color: var(--color-claro);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 0.85rem;
+    color: #6c727f;
 }
