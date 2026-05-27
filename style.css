@@ -1,0 +1,202 @@
+/* RESETEO BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* BARRA DE NAVEGACIÓN */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+}
+
+.company-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: 500;
+    margin-left: 25px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #8cb63c;
+}
+
+/* SECCIÓN PRINCIPAL (HERO) */
+.hero-section {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('assets/imagendofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    padding-top: 70px;
+}
+
+.hero-content {
+    color: #ffffff;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.btn-hero {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #8cb63c;
+    color: #ffffff;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(140, 182, 60, 0.3);
+}
+
+.btn-hero:hover {
+    background-color: #769b32;
+    transform: translateY(-2px);
+}
+
+/* SECCIÓN DE SERVICIOS - CSS GRID Y EFECTO HOVER */
+.services-section {
+    padding: 100px 50px;
+    background-color: #f4f6f8;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.services-header h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.services-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Grid Autoadaptable sin Media Queries repetitivos */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tarjeta individual */
+.service-card {
+    position: relative;
+    height: 350px;
+    border-radius: 10px;
+    overflow: hidden; /* Oculta todo lo que salga de la tarjeta */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+/* Imagen que cubre la tarjeta */
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Capa que contiene el texto y sube en el hover */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(16, 24, 32, 0.95) 70%, rgba(16, 24, 32, 0.4));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    color: #ffffff;
+    /* Ubicación por defecto de la descripción antes del hover: desplazada hacia abajo */
+    transform: translateY(calc(100% - 70px)); 
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-overlay h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease;
+}
+
+/* INTERACCIONES (HOVER) */
+.service-card:hover .card-overlay {
+    transform: translateY(0); /* Sube por completo revelando la descripción */
+}
+
+.service-card:hover .card-description {
+    opacity: 1; /* Muestra suavemente el texto descriptivo */
+}
+
+.service-card:hover .card-img {
+    transform: scale(1.1); /* Hace un sutil zoom a la imagen de fondo */
+}
